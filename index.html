@@ -29,21 +29,30 @@
     <title>PlatziVideo</title>
   </head>
   <body>
-    <header>
-      <div class="logo"></div>
+    <header class="header">
+      <div class="header__logo">
+        <img
+          width="200px"
+          height="61px"
+          src="/assets/logo-platzi-video.png"
+          alt="Logo Platzi Video"
+        />
+      </div>
       <div class="menu">
-        <div>
-          <img src="assets/user-icon.png" alt="" />
+        <div class="menu__content">
+          <img class="header__user-icon" src="assets/user-icon.png" alt="" />
           <p>Perfil</p>
         </div>
         <ul>
-          <li><a href="/">Cuenta</a></li>
+          <li class="menu__item">
+            <a class="menu__account" href="/">Cuenta</a>
+          </li>
         </ul>
       </div>
     </header>
 
     <section class="main">
-      <h2>¿Qué quieres ver hoy?</h2>
+      <h2 class="main__title">¿Qué quieres ver hoy?</h2>
       <input type="text" class="search-input" placeholder="Buscar..." />
     </section>
 
