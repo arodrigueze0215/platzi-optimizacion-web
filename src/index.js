@@ -4,6 +4,22 @@ import CarouselItem from './CarouselItem'
 
 const SectionTitle = title => h('h3.carousel__title', title)
 
+const image = imageUrl =>
+  h('img.carousel-item__img', { 'data-img': imageUrl, alt: '' })
+
+const callback = (entires, observer) => {
+  entires.forEach(entry => {
+    const { target } = entry
+    if (entry.isIntersecting) target.src = target.getAttribute('data-img')
+  })
+}
+const option = {
+  root: document.querySelector('carousel__container'),
+  threshold: 0.2,
+}
+
+const intersectionOberver = new IntersectionObserver(callback, option)
+
 const Carousel = ({ itemsList = [] }) =>
   h(
     'section.carousel',
@@ -12,15 +28,18 @@ const Carousel = ({ itemsList = [] }) =>
       itemsList.map(
         ({
           attributes: { titles, posterImage, slug, youtubeVideoId, startDate },
-        }) =>
-          CarouselItem({
-            imageUrl: posterImage.medium,
+        }) => {
+          const elementImage = image(posterImage.medium)
+          intersectionOberver.observe(elementImage)
+          return CarouselItem({
+            elementImage,
             title: titles.en,
             subtitle: titles.ja_jp,
             slug,
             youtubeVideoId,
             startDate,
           })
+        }
       )
     )
   )
