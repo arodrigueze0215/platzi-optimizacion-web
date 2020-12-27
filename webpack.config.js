@@ -14,12 +14,20 @@ const config = {
   entry: './src/index.js',
   output: {
     path: path.resolve(__dirname, 'dist'),
-    publicPath: '/dist',
-    filename: 'bundle.js',
+    publicPath: '/dist/',
+    filename: '[name].bundle.js',
   },
   plugins,
   devServer: {
     contentBase: '.',
+  },
+  optimization: {
+    splitChunks: {
+      chunks: 'all',
+    },
+  },
+  module: {
+    rules: [{ test: /\.css$/i, use: ['style-loader', 'css-loader'] }],
   },
 }
 
